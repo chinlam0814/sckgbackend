@@ -1,24 +1,12 @@
 from django.http import JsonResponse
-from user.models import Admin
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Texts
+from sklearn.metrics.pairwise import cosine_similarity
+import numpy as np
 import json
-from flask import Flask, jsonify, request
-from neo4j import GraphDatabase
 import openai
 import os
-from langchain.prompts import PromptTemplate
-from langchain_openai import OpenAI
-from langchain.chains import LLMChain
-from langchain.graphs.networkx_graph import KG_TRIPLE_DELIMITER
-import pprint
-from pyvis.network import Network
-import networkx as nx
-import gradio as gr
-from langchain.indexes import GraphIndexCreator
-from langchain.chains import graph_qa
-from langchain.graphs.networkx_graph import KnowledgeTriple
 # Prompt template for knowledge triple extraction
 # _DEFAULT_KNOWLEDGE_TRIPLE_EXTRACTION_TEMPLATE = (
 #     "You are a networked intelligence helping a human track knowledge triples"
@@ -48,11 +36,11 @@ from langchain.graphs.networkx_graph import KnowledgeTriple
 #     "Output:"
 # )
 
-uri = "neo4j://localhost:7687"
-user = "neo4j"
-password = "Xzq-071797397074"
+# uri = "neo4j://localhost:7687"
+# user = "neo4j"
+# password = "Xzq-071797397074"
 
-driver = GraphDatabase.driver(uri, auth=(user, password))
+# driver = GraphDatabase.driver(uri, auth=(user, password))
 
 # Create your views here.
 def returnJson(data = None, errorCode = 0):
@@ -92,7 +80,7 @@ def delete_text(request, textId):
             return returnJson([dict(text.body()) for text in texts])
 
         except Texts.DoesNotExists:
-            return returnJson([], 400)
+            return returnJson([], 404)
 
 def generate_json(text):
     openai.api_key = 'sk-proj-3ulLVu675fEXo9Md8cVXT3BlbkFJkDVUgy73QPQG8Fra3ufR'

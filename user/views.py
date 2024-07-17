@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.contrib.auth import login, logout, authenticate
 from .models import Account, Admin, User
-from .serializers import AccountSerializer, AdminSerializer
 import json
 
 def returnJson(data = None, errorCode = 0, cookies = ''):
@@ -97,7 +96,7 @@ def delete_account(request, pk):
             accounts = Account.objects.all()
             return returnJson([dict(account.body()) for account in accounts])
         except Account.DoesNotExist:
-            return returnJson([], 400)
+            return returnJson([], 404)
 
 def delete_admin(request, pk):
     if request.method == 'DELETE':
@@ -137,7 +136,7 @@ def edit_username(request, pk):
 
             try:
                 check = Admin.objects.get(username = data['username'])
-                return returnJson([], 404)
+                return returnJson([], 400)
             
             except:
                 admin.username = data['username']
@@ -154,7 +153,7 @@ def edit_username(request, pk):
 
                 try:
                     check = Account.objects.get(username = data['username'])
-                    return returnJson([], 404)
+                    return returnJson([], 400)
                 
                 except:
                     account.username = data['username']

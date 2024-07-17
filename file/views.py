@@ -50,7 +50,7 @@ def create_file_info(request):
 
 		return returnJson([dict(file_info.body())])
 	
-	return returnJson([], 0, 404)
+	return returnJson([], 0, 400)
 
 def create_file(request, pk):
 	try:
