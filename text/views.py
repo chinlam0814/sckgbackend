@@ -6,7 +6,6 @@ from triples.models import Triples
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 import json
-import openai
 import os
 
 # Create your views here.
