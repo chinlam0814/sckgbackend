@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import Triples
-from sklearn.metrics.pairwise import cosine_similarity
 import json
 import os
 

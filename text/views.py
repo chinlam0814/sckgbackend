@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Texts
 from triples.models import Triples
-from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 import json
 import os
