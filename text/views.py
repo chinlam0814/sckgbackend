@@ -48,7 +48,7 @@ def delete_text(request, textId):
             
             text = Texts.objects.get(id=textId)
             print(text.created_by)
-            # print(username)
+            print(username)
             if username == text.created_by:
                 text.delete()
                 texts = Texts.objects.all()
