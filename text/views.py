@@ -22,7 +22,6 @@ def text(request, pk):
         text = Texts.objects.get(id=pk)
         return returnJson([dict(text.body())])
 
-@login_required
 def create_text(request):
     if request.method == 'POST':
         data = json.loads(request.body)
