@@ -49,6 +49,7 @@ marshmallow==3.21.1
 multidict==6.0.5
 mypy-extensions==1.0.0
 numpy==1.26.4
+orjson==2.0.1
 packaging==23.2
 pandas==2.2.3
 parso==0.8.4
